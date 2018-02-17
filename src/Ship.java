@@ -12,13 +12,21 @@ public class Ship {
     private int y;
 
 
-    public Ship(int numberOfDeck) {
+    Ship(int numberOfDeck) {
         this.numberOfDeck = numberOfDeck;
     }
 
     public void setOrientation(int dx, int dy) {
         this.dx = dx;
         this.dy = dy;
+    }
+
+    public void setAsKilled() {
+        List<Pair<Integer, Integer>> decks = getShipCells();
+        hottedDeck = new ArrayList<>();
+        for (Pair<Integer, Integer> deck : decks) {
+            hottedDeck.add(new Pair<>(deck.getKey(), deck.getValue()));
+        }
     }
 
     public int getX() {
@@ -60,7 +68,7 @@ public class Ship {
     public List<Pair<Integer, Integer>> getShipCells() {
         List<Pair<Integer, Integer>> cells = new ArrayList<>();
         for (int i = 0; i < numberOfDeck; i++) {
-            cells.add(new Pair(x + dx * i, y + dy * i));
+            cells.add(new Pair<>(x + dx * i, y + dy * i));
         }
         return cells;
     }
@@ -96,9 +104,9 @@ public class Ship {
     public List<Pair<Integer, Integer>> getLifeDecks() {
         List<Pair<Integer, Integer>> shipCells = getShipCells();
         List<Pair<Integer, Integer>> lifeDecks = new ArrayList<>();
-        for (int i = 0; i < shipCells.size(); i++) {
-            if (!Utils.samePairInListPresent(hottedDeck, shipCells.get(i))) {
-                lifeDecks.add(shipCells.get(i));
+        for (Pair<Integer, Integer> shipCell : shipCells) {
+            if (!Utils.samePairInListPresent(hottedDeck, shipCell)) {
+                lifeDecks.add(shipCell);
             }
         }
         return lifeDecks;

@@ -2,14 +2,13 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Visualization extends JFrame{
+class Visualization extends JFrame {
     private MyCanvas myCanvas;
-    private EnemyShipsView enemyShipsView;
+
 
     Visualization(Game game) {
         createMainWindow();
         myCanvas= new MyCanvas(game);
-        enemyShipsView = new EnemyShipsView(50, 600);
 
         this.add(myCanvas);
         this.setVisible(true);
@@ -19,11 +18,11 @@ public class Visualization extends JFrame{
     private void createMainWindow() {
         this.setSize(1200, 800);
         this.setTitle("Морской бой");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
     }
 
-    public void startMouseListener() {
+    private void startMouseListener() {
         myCanvas.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

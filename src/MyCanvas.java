@@ -6,16 +6,19 @@ import java.awt.event.MouseEvent;
 public class MyCanvas extends Canvas {
     private MyPole myPole = new MyPole(50,50);
     private EnemyPole enemyPole = new EnemyPole(500, 50);
+    private EnemyShipsView enemyShipsView = new EnemyShipsView(50, 500);
 
-    public MyCanvas(Game game) {
+    MyCanvas(Game game) {
         myPole.setPlayer(game.getMyPlayer());
         enemyPole.setPlayer(game.getEnemyPlayer());
     }
 
     @Override
     public void paint(Graphics graphics) {
+        enemyShipsView.markKilledShips(enemyPole.getPlayer().getShips());
         enemyPole.draw(graphics);
         myPole.draw(graphics);
+        enemyShipsView.draw(graphics);
     }
 
     public void clicked(MouseEvent e) {
@@ -36,13 +39,10 @@ public class MyCanvas extends Canvas {
         }
     }
     private boolean mouseInsideEnemyPole(int x, int y){
-        if((x > enemyPole.getStartX()
+        return (x > enemyPole.getStartX()
                 && x <= enemyPole.getStartX() + Constants.cellWidth * Constants.xCellsNumber)
                 &&
                 (y > enemyPole.getStartY()
-                        && y <= enemyPole.getStartY() + Constants.cellHeight * Constants.yCellsNumber)){
-            return true;
-        }
-        return false;
+                        && y <= enemyPole.getStartY() + Constants.cellHeight * Constants.yCellsNumber);
     }
 }

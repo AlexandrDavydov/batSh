@@ -1,10 +1,7 @@
-import org.testng.annotations.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tests {
-    @Test
     public void shipsCrosses(){
         Ship ship = new Ship(4);
         ship.setOrientation(0, 1);
@@ -20,11 +17,9 @@ public class Tests {
 
         Player p = new Player();
         boolean shipsDoNotCrosses = p.shipsCrosses(ship, ships);
-        assert shipsDoNotCrosses == false;
-        System.out.println("shipsCrosses = "+shipsDoNotCrosses);
+        assert !shipsDoNotCrosses;
     }
 
-    @Test
     public void shipsNotCrosses(){
         Ship ship = new Ship(4);
         ship.setOrientation(0, 1);
