@@ -5,11 +5,9 @@ import java.awt.event.MouseListener;
 class Visualization extends JFrame {
     private MyCanvas myCanvas;
 
-
     Visualization(Game game) {
         createMainWindow();
         myCanvas= new MyCanvas(game);
-
         this.add(myCanvas);
         this.setVisible(true);
         startMouseListener();

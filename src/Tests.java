@@ -19,7 +19,6 @@ public class Tests {
         boolean shipsDoNotCrosses = p.shipsCrosses(ship, ships);
         assert !shipsDoNotCrosses;
     }
-
     public void shipsNotCrosses(){
         Ship ship = new Ship(4);
         ship.setOrientation(0, 1);

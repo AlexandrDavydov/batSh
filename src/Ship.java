@@ -21,6 +21,54 @@ public class Ship {
         this.dy = dy;
     }
 
+    public boolean isVerticalOrientation(){
+        return dx == 0;
+    }
+
+    public Boolean isHotted(){
+        return numberOfDeck != hottedDeck.size() && hottedDeck.size() > 0;
+    }
+
+    public Integer getMaxXHottedCoordinate(){
+        Integer maxNumber = 0;
+        for(int i=0; i<hottedDeck.size(); i++){
+            if(hottedDeck.get(i).getKey() > maxNumber){
+                maxNumber = hottedDeck.get(i).getKey();
+            }
+        }
+        return maxNumber;
+    }
+
+    public Integer getMaxYHottedCoordinate(){
+        Integer maxNumber = 0;
+        for(int i=0; i<hottedDeck.size(); i++){
+            if(hottedDeck.get(i).getValue() > maxNumber){
+                maxNumber = hottedDeck.get(i).getValue();
+            }
+        }
+        return maxNumber;
+    }
+
+    public Integer getMinXHottedCoordinate(){
+        Integer minNumber = 9;
+        for(int i=0; i<hottedDeck.size(); i++){
+            if(hottedDeck.get(i).getKey() < minNumber){
+                minNumber = hottedDeck.get(i).getKey();
+            }
+        }
+        return minNumber;
+    }
+
+    public Integer getMinYHottedCoordinate(){
+        Integer minNumber = 9;
+        for(int i=0; i<hottedDeck.size(); i++){
+            if(hottedDeck.get(i).getValue() < minNumber){
+                minNumber = hottedDeck.get(i).getValue();
+            }
+        }
+        return minNumber;
+    }
+
     public void setAsKilled() {
         List<Pair<Integer, Integer>> decks = getShipCells();
         hottedDeck = new ArrayList<>();

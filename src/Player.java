@@ -56,19 +56,10 @@ public class Player {
         for(int i=0; i<busyCells.size(); i++){
             if(!Utils.samePairInListPresent(getMissingShuts(), busyCells.get(i))  &&
                     !Utils.samePairInListPresent(ship.getShipCells(), busyCells.get(i)) &&
-                    pairInsidePole( busyCells.get(i))){
+                    Utils.pairInsidePole( busyCells.get(i))){
                 missingShuts.add(busyCells.get(i));
             }
         }
-    }
-
-    private Boolean pairInsidePole(Pair<Integer, Integer> coordinates){
-        if(coordinates.getKey() >=0 && coordinates.getKey() < Constants.xCellsNumber){
-            if(coordinates.getValue() >=0 && coordinates.getValue() < Constants.yCellsNumber){
-                return true;
-            }
-        }
-        return false;
     }
 
     public Boolean turn(Pair<Integer, Integer> shut) {

@@ -21,4 +21,13 @@ public class Utils {
         }
         return false;
     }
+
+    static public Boolean pairInsidePole(Pair<Integer, Integer> coordinates){
+        if(coordinates.getKey() >=0 && coordinates.getKey() < Constants.xCellsNumber){
+            if(coordinates.getValue() >=0 && coordinates.getValue() < Constants.yCellsNumber){
+                return true;
+            }
+        }
+        return false;
+    }
 }
