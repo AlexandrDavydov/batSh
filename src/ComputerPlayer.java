@@ -27,9 +27,12 @@ public class ComputerPlayer {
             }
         }else{
             List<Pair<Integer, Integer>> expectedCells = getExpectedCellsToTurn(hottedShip);
-            //Integer index = Math.toIntExact(Math.round(Math.random()*(expectedCells.size()-1)));
-            x=expectedCells.get(0).getKey();
-            y=expectedCells.get(0).getValue();
+            Integer index = 0;
+            if(expectedCells.size()>1){
+                index = Math.toIntExact(Math.round(Math.random()*(expectedCells.size()-1)));
+            }
+            x=expectedCells.get(index).getKey();
+            y=expectedCells.get(index).getValue();
         }
         return new Pair<>(x,y);
     }

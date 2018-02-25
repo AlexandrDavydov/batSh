@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,8 +11,11 @@ class Visualization extends JFrame {
         myCanvas= new MyCanvas(game);
         this.add(myCanvas);
         this.setVisible(true);
-        startMouseListener();
+        myCanvas.setMyTurn(true);
+        //startMouseListener();
+
     }
+
 
     private void createMainWindow() {
         this.setSize(1200, 800);
@@ -20,7 +24,7 @@ class Visualization extends JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    private void startMouseListener() {
+    /*private void startMouseListener() {
         myCanvas.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -47,5 +51,5 @@ class Visualization extends JFrame {
 
             }
         });
-    }
+    }*/
 }
