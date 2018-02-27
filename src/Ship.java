@@ -1,11 +1,12 @@
 import javafx.util.Pair;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Ship {
     private int numberOfDeck;
-    private List<Pair<Integer, Integer>> hottedDeck = new ArrayList<>();
+    private List<Point> hottedDeck = new ArrayList<>();
     private int dx;
     private int dy;
     private int x;
@@ -32,8 +33,8 @@ public class Ship {
     public Integer getMaxXHottedCoordinate(){
         Integer maxNumber = 0;
         for(int i=0; i<hottedDeck.size(); i++){
-            if(hottedDeck.get(i).getKey() > maxNumber){
-                maxNumber = hottedDeck.get(i).getKey();
+            if(hottedDeck.get(i).x > maxNumber){
+                maxNumber = hottedDeck.get(i).x;
             }
         }
         return maxNumber;
@@ -42,8 +43,8 @@ public class Ship {
     public Integer getMaxYHottedCoordinate(){
         Integer maxNumber = 0;
         for(int i=0; i<hottedDeck.size(); i++){
-            if(hottedDeck.get(i).getValue() > maxNumber){
-                maxNumber = hottedDeck.get(i).getValue();
+            if(hottedDeck.get(i).y > maxNumber){
+                maxNumber = hottedDeck.get(i).y;
             }
         }
         return maxNumber;
@@ -52,8 +53,8 @@ public class Ship {
     public Integer getMinXHottedCoordinate(){
         Integer minNumber = 9;
         for(int i=0; i<hottedDeck.size(); i++){
-            if(hottedDeck.get(i).getKey() < minNumber){
-                minNumber = hottedDeck.get(i).getKey();
+            if(hottedDeck.get(i).x < minNumber){
+                minNumber = hottedDeck.get(i).x;
             }
         }
         return minNumber;
@@ -62,18 +63,18 @@ public class Ship {
     public Integer getMinYHottedCoordinate(){
         Integer minNumber = 9;
         for(int i=0; i<hottedDeck.size(); i++){
-            if(hottedDeck.get(i).getValue() < minNumber){
-                minNumber = hottedDeck.get(i).getValue();
+            if(hottedDeck.get(i).y < minNumber){
+                minNumber = hottedDeck.get(i).y;
             }
         }
         return minNumber;
     }
 
     public void setAsKilled() {
-        List<Pair<Integer, Integer>> decks = getShipCells();
+        List<Point> decks = getShipCells();
         hottedDeck = new ArrayList<>();
-        for (Pair<Integer, Integer> deck : decks) {
-            hottedDeck.add(new Pair<>(deck.getKey(), deck.getValue()));
+        for (Point deck : decks) {
+            hottedDeck.add(new Point(deck.x, deck.y));
         }
     }
 
@@ -113,31 +114,31 @@ public class Ship {
         return dy;
     }
 
-    public List<Pair<Integer, Integer>> getShipCells() {
-        List<Pair<Integer, Integer>> cells = new ArrayList<>();
+    public List<Point> getShipCells() {
+        List<Point> cells = new ArrayList<>();
         for (int i = 0; i < numberOfDeck; i++) {
-            cells.add(new Pair<>(x + dx * i, y + dy * i));
+            cells.add(new Point(x + dx * i, y + dy * i));
         }
         return cells;
     }
 
-    public List<Pair<Integer, Integer>> getAllBusyCells() {
-        List<Pair<Integer, Integer>> allBusyCells = new ArrayList<>();
+    public List<Point> getAllBusyCells() {
+        List<Point> allBusyCells = new ArrayList<>();
         for (int x = this.x - 1; x <= this.x + dx * numberOfDeck + 1 - dx; x++) {
             for (int y = this.y - 1; y <= this.y + dy * numberOfDeck + 1 - dy; y++) {
                 if (coordinatesInsidePole(x, y)) {
-                    allBusyCells.add(new Pair<>(x, y));
+                    allBusyCells.add(new Point(x, y));
                 }
             }
         }
         return allBusyCells;
     }
 
-    public void addHottedDeck(Pair<Integer, Integer> hotted) {
+    public void addHottedDeck(Point hotted) {
         hottedDeck.add(hotted);
     }
 
-    public boolean isHottedAlready(Pair<Integer, Integer> shut) {
+    public boolean isHottedAlready(Point shut) {
         return Utils.samePairInListPresent(hottedDeck, shut);
     }
 
@@ -145,14 +146,14 @@ public class Ship {
         return numberOfDeck == hottedDeck.size();
     }
 
-    public List<Pair<Integer, Integer>> getHottedDecks() {
+    public List<Point> getHottedDecks() {
         return hottedDeck;
     }
 
-    public List<Pair<Integer, Integer>> getLifeDecks() {
-        List<Pair<Integer, Integer>> shipCells = getShipCells();
-        List<Pair<Integer, Integer>> lifeDecks = new ArrayList<>();
-        for (Pair<Integer, Integer> shipCell : shipCells) {
+    public List<Point> getLifeDecks() {
+        List<Point> shipCells = getShipCells();
+        List<Point> lifeDecks = new ArrayList<>();
+        for (Point shipCell : shipCells) {
             if (!Utils.samePairInListPresent(hottedDeck, shipCell)) {
                 lifeDecks.add(shipCell);
             }
@@ -161,6 +162,6 @@ public class Ship {
     }
 
     private boolean coordinatesInsidePole(int x, int y) {
-        return x >= 0 && x <= Pole.WIDTH && y >= 0 && y <= Pole.HEIGHT;
+        return x >= 0 && x <= Constants.xCellsNumber && y >= 0 && y <= Constants.yCellsNumber;
     }
 }

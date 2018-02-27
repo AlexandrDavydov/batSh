@@ -1,4 +1,3 @@
-
 import javafx.util.Pair;
 
 import java.awt.*;
@@ -61,11 +60,11 @@ public class BasePole {
 
     }
 
-    private void drawMissingShuts(Graphics graphics, List<Pair<Integer, Integer>> missingShuts) {
+    private void drawMissingShuts(Graphics graphics, List<Point> missingShuts) {
         graphics.setColor(Color.GRAY);
-        for (Pair<Integer, Integer> missingShut : missingShuts) {
-            drawShutCircle(startX + missingShut.getKey() * Constants.cellWidth + Constants.cellWidth / 2 - 5,
-                    startY + missingShut.getValue() * Constants.cellHeight + Constants.cellHeight / 2 - 5,
+        for (Point missingShut : missingShuts) {
+            drawShutCircle(startX + missingShut.x * Constants.cellWidth + Constants.cellWidth / 2 - 5,
+                    startY + missingShut.y * Constants.cellHeight + Constants.cellHeight / 2 - 5,
                     10, 10, graphics);
         }
     }
@@ -111,18 +110,18 @@ public class BasePole {
         }
     }
 
-    private void drawKilledDeck(List<Pair<Integer, Integer>> shipCells, Graphics graphics) {
-        for (Pair<Integer, Integer> shipCell : shipCells) {
-            drawKilledDeck(startX + shipCell.getKey() * Constants.cellWidth,
-                    startY + shipCell.getValue() * Constants.cellHeight,
+    private void drawKilledDeck(List<Point> shipCells, Graphics graphics) {
+        for (Point shipCell : shipCells) {
+            drawKilledDeck(startX + shipCell.x * Constants.cellWidth,
+                    startY + shipCell.y * Constants.cellHeight,
                     Constants.cellWidth, Constants.cellHeight, graphics);
         }
     }
 
-    private void drawLifeDeck(List<Pair<Integer, Integer>> shipCells, Graphics graphics) {
-        for (Pair<Integer, Integer> shipCell : shipCells) {
-            drawLifeDeck(startX + shipCell.getKey() * Constants.cellWidth,
-                    startY + shipCell.getValue() * Constants.cellHeight,
+    private void drawLifeDeck(List<Point> shipCells, Graphics graphics) {
+        for (Point shipCell : shipCells) {
+            drawLifeDeck(startX + shipCell.x * Constants.cellWidth,
+                    startY + shipCell.y * Constants.cellHeight,
                     Constants.cellWidth, Constants.cellHeight, graphics);
         }
     }

@@ -1,16 +1,17 @@
 import javafx.util.Pair;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
     private List<Ship> ships = new ArrayList<>();
-    private List<Pair<Integer, Integer>> missingShuts = new ArrayList<>();
+    private List<Point> missingShuts = new ArrayList<>();
 
     public Player() {
     }
 
-    public List<Pair<Integer, Integer>> getMissingShuts() {
+    public List<Point> getMissingShuts() {
         return missingShuts;
     }
 
@@ -26,8 +27,8 @@ public class Player {
                 ship = new Ship(squadron.get(i));
                 int dx = (int) Math.round(Math.random());
                 ship.setOrientation(dx, 1 - dx);
-                ship.setX((int) Math.round(Math.random() * (Pole.WIDTH - ship.getWidth() - 1)));
-                ship.setY((int) Math.round(Math.random() * (Pole.HEIGHT - ship.getHeight() - 1)));
+                ship.setX((int) Math.round(Math.random() * (Constants.xCellsNumber - ship.getWidth() - 1)));
+                ship.setY((int) Math.round(Math.random() * (Constants.yCellsNumber - ship.getHeight() - 1)));
             } while (shipsCrosses(ship, ships));
             ships.add(ship);
         }
@@ -52,7 +53,7 @@ public class Player {
     }
 
     private void addShutsAroundKilledShip(Ship ship){
-        List<Pair<Integer, Integer>> busyCells = ship.getAllBusyCells();
+        List<Point> busyCells = ship.getAllBusyCells();
         for(int i=0; i<busyCells.size(); i++){
             if(!Utils.samePairInListPresent(getMissingShuts(), busyCells.get(i))  &&
                     !Utils.samePairInListPresent(ship.getShipCells(), busyCells.get(i)) &&
@@ -62,7 +63,7 @@ public class Player {
         }
     }
 
-    public Boolean turn(Pair<Integer, Integer> shut) {
+    public Boolean turn(Point shut) {
         Ship hattedShip = getHattedShip(shut);
         if(hattedShip != null){
             if(!hattedShip.isHottedAlready(shut)) {
@@ -88,7 +89,7 @@ public class Player {
         return false;
     }
 
-    private Ship getHattedShip(Pair<Integer, Integer> shut){
+    private Ship getHattedShip(Point shut){
         for(int i=0; i<ships.size(); i++){
             if(Utils.samePairInListPresent(ships.get(i).getShipCells(), shut)){
                 return ships.get(i);

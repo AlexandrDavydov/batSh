@@ -42,7 +42,7 @@ public class MyCanvas extends Canvas {
         if (mouseInsideEnemyPole(e.getX(), e.getY())) {
             int _x = (e.getX() - enemyPole.getStartX())/Constants.cellWidth;
             int _y = (e.getY() - enemyPole.getStartY())/Constants.cellHeight;
-            ITurnAgain = enemyPole.getPlayer().turn(new Pair<>(_x, _y));
+            ITurnAgain = enemyPole.getPlayer().turn(new Point(_x, _y));
             paint(getGraphics());
             if(ITurnAgain){
                 Boolean lose = enemyPole.getPlayer().checkPlayerLose();
@@ -78,7 +78,7 @@ public class MyCanvas extends Canvas {
         setMyTurn(false);
         mouseActive = false;
         Boolean enemyTurnAgain;
-        Pair<Integer, Integer> enemyShut = computerPlayer.getTurn();
+        Point enemyShut = computerPlayer.getTurn();
         pause(500);
         enemyTurnAgain = myPole.getPlayer().turn(enemyShut);
         paint(getGraphics());

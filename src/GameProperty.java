@@ -1,12 +1,13 @@
 import javafx.util.Pair;
 
+import java.awt.*;
 import java.util.List;
 
 public class GameProperty {
     private List<Ship> ships;
-    private List<Pair<Integer, Integer>> missingShuts;
+    private List<Point> missingShuts;
 
-    public GameProperty(List<Ship> ships, List<Pair<Integer, Integer>> missingShuts) {
+    public GameProperty(List<Ship> ships, List<Point> missingShuts) {
         this.ships = ships;
         this.missingShuts = missingShuts;
     }
@@ -15,7 +16,7 @@ public class GameProperty {
         return ships;
     }
 
-    public List<Pair<Integer, Integer>> getMissingShuts() {
+    public List<Point> getMissingShuts() {
         return missingShuts;
     }
 }

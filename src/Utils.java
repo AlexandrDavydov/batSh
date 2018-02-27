@@ -1,11 +1,12 @@
 import javafx.util.Pair;
 
+import java.awt.*;
 import java.util.List;
 
 public class Utils {
     static final public String[] upLine = "1,2,3,4,5,6,7,8,9,10".split(",");
     //static final public String[] upLine = "А,Б,В,Г,Д,Е,Ж,З,И,К".split(",");
-    static public boolean ListsHasSamePairs(List<Pair<Integer, Integer>> l1, List<Pair<Integer, Integer>> l2){
+    static public boolean ListsHasSamePairs(List<Point> l1, List<Point> l2){
         for(int i=0; i<l1.size(); i++){
             if(samePairInListPresent(l2, l1.get(i))){
                 return true;
@@ -13,18 +14,18 @@ public class Utils {
         }
         return false;
     }
-    static public boolean samePairInListPresent(List<Pair<Integer, Integer>> pairList, Pair<Integer, Integer> pair){
+    static public boolean samePairInListPresent(List<Point> pairList, Point point){
         for(int i=0; i<pairList.size(); i++){
-            if(pairList.get(i).equals(pair)){
+            if(pairList.get(i).equals(point)){
                 return true;
             }
         }
         return false;
     }
 
-    static public Boolean pairInsidePole(Pair<Integer, Integer> coordinates){
-        if(coordinates.getKey() >=0 && coordinates.getKey() < Constants.xCellsNumber){
-            if(coordinates.getValue() >=0 && coordinates.getValue() < Constants.yCellsNumber){
+    static public Boolean pairInsidePole(Point coordinates){
+        if(coordinates.x >=0 && coordinates.x < Constants.xCellsNumber){
+            if(coordinates.y >=0 && coordinates.y < Constants.yCellsNumber){
                 return true;
             }
         }
